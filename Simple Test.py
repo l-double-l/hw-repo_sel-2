@@ -16,13 +16,17 @@ def driver(request):
     request.addfinalizer(wd.quit)
     return wd
 
-
 def test1(driver):
-    driver.get("https://obtest18.centaurportal.com/d4w/0315/org-91/landing")
+    #Please check the PORT!!!!!
+    driver.get("http://localhost:8080/litecart/admin/login.php")
 
-    WebDriverWait(driver, 10).until(EC.title_contains("Welcome to eServices"))
+    WebDriverWait(driver, 10).until(EC.title_contains("My Store"))
 
-    sign_in_lnk = driver.find_element_by_link_text("Sign In")
-    sign_in_lnk.click()
+    login_box = driver.find_element_by_name("username")
+    login_box.send_keys("admin")
 
-    WebDriverWait(driver, 10).until(EC.title_contains("Sign In"))
+    password_box = driver.find_element_by_name("password")
+    password_box.send_keys("admin")
+
+    login_btn = driver.find_element_by_name("login")
+    login_btn.click()
