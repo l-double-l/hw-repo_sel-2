@@ -30,3 +30,5 @@ def test1(driver):
 
     login_btn = driver.find_element_by_name("login")
     login_btn.click()
+
+    driver.quit()
