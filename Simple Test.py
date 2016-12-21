@@ -42,7 +42,7 @@ def ch_driver(request):
     return wd
 
 def test_f_n(f_n_driver):
-    #Please check the PORT!!!!!
+    # Please check the PORT!!!!!
     f_n_driver.get("http://localhost:8080/litecart/admin/login.php")
 
     WebDriverWait(f_n_driver, 10).until(EC.title_contains("My Store"))
