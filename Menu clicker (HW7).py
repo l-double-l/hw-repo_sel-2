@@ -17,9 +17,9 @@ import pytest
 
 @pytest.fixture
 def driver(request):
-    binary = FirefoxBinary('C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe')
-    wd = webdriver.Firefox(firefox_binary=binary)
-    wd.implicitly_wait(10)
+    wd = webdriver.Chrome()
+    wd.implicitly_wait(3)
+    wd.maximize_window()
     print(wd.capabilities)
     request.addfinalizer(wd.quit)
     return wd
@@ -45,11 +45,21 @@ def test_menu(driver):
 
     for data in main_menu:
         menu_index += 1
-        time.sleep(1)
-        wait = WebDriverWait(driver, 5) # seconds
-        element = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "ul li#app-:nth-child({}) .name".format(menu_index))))
-        print("waited")
-        element.click()
-        print("clicked")
 
+        wait = WebDriverWait(driver, 5) # seconds
+        menu_elem = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "ul li#app-:nth-child({}) .name".format(menu_index))))
+        menu_elem.click()
+
+        sub_menu = driver.find_elements_by_css_selector("ul.docs li")
+        if sub_menu:
+            sub_index = 0
+            for sub_data in sub_menu:
+                sub_index += 1
+
+                wait = WebDriverWait(driver, 5) # seconds
+                sub_elem = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "ul.docs li:nth-child({}) .name".format(sub_index))))
+                sub_elem.click()
+
+                header = driver.find_element_by_css_selector("h1")
+                print(header.text)
 
