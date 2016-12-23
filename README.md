@@ -1,6 +1,9 @@
 # hw-repo_sel-2
 Home work repository for selenium-2 group in software-testing training
 
+v.0.4.1
+  Check alphabetical order
+
 v.0.3.3
   Incorrect method is fixed
 
