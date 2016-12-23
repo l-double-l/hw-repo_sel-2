@@ -29,8 +29,8 @@ def test_most_popular(driver):
 
     if most_popular:
         for good in most_popular:
-            assert good.text.startswith("NEW\n") or good.text.startswith("SALE\n")
-            assert not ("NEW\n" in good.text and "SALE\n" in good.text)
+            stickers = good.find_elements_by_css_selector(".sticker")
+            assert len(stickers) == 1
 
 def test_latest_products(driver):
     # Please check the PORT!!!!!
@@ -42,5 +42,5 @@ def test_latest_products(driver):
 
     if latest_products:
         for good in latest_products:
-            assert good.text.startswith("NEW\n") or good.text.startswith("SALE\n")
-            assert not ("NEW\n" in good.text and "SALE\n" in good.text)
+            stickers = good.find_elements_by_css_selector(".sticker")
+            assert len(stickers) == 1

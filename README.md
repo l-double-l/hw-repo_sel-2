@@ -1,9 +1,11 @@
 # hw-repo_sel-2
 Home work repository for selenium-2 group in software-testing training
 
+v.0.3.3
+  Incorrect method is fixed
+
 v0.3.2
   Sticker checker added
-  Now the tests pass when good Name contains "SALE" or "NEW" (f.e. Book: "HAPPY NEW YEAR")
 
 v.0.3.1
  Menu clicker on admin area
