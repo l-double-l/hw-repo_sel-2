@@ -1,6 +1,9 @@
 # hw-repo_sel-2
 Home work repository for selenium-2 group in software-testing training
 
+v.0.5.1
+  Check prices, names and styles (only on Chrome)
+
 v.0.4.1
   Check alphabetical order
 
