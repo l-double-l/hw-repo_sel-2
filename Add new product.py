@@ -3,7 +3,7 @@ from lib2to3.pgen2 import driver
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.keys import Keys
-
+import os
 import pytest
 '''
 
@@ -44,7 +44,8 @@ def test_add_new_product(driver):
     driver.find_element_by_css_selector("[name=code").send_keys("111111")
     driver.find_element_by_css_selector("[name=quantity").clear()
     driver.find_element_by_css_selector("[name=quantity").send_keys("3")
-    driver.find_element_by_css_selector("[type=file").send_keys("C:\\test.png")
+    driver.find_element_by_css_selector("[type=file").send_keys(os.path.abspath("relative_test.png"))
+    #print(os.path.abspath("relative_test.png"))
     driver.find_element_by_css_selector("div.tabs li:nth-child(4)").click()
 
     driver.find_element_by_css_selector("[name=purchase_price").clear()
