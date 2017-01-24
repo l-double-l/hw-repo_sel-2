@@ -4,6 +4,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from HW19_Cart_Test_Objects.app.application import Application
+
 import os
 import pytest
 '''
@@ -13,28 +15,21 @@ import pytest
 '''
 
 @pytest.fixture
-def driver(request):
-    wd = webdriver.Chrome()
-    wd.implicitly_wait(3)
-    wd.maximize_window()
-    wd.delete_all_cookies()
-    print(wd.capabilities)
-    request.addfinalizer(wd.quit)
-    return wd
+def app(request):
+    app = Application()
+    request.addfinalizer(app.quit)
+    return app
 
-def test_prices_and_names(driver):
-    # Please check the PORT!!!!!
-    driver.get("http://localhost:8080/litecart")
-    wait = WebDriverWait(driver, 5)
 
-    for indx in range(1, 4):
-        driver.find_element_by_css_selector("#box-most-popular img").click()
-        driver.find_element_by_name("add_cart_product").click()
-        assert wait.until(EC.text_to_be_present_in_element((By.CLASS_NAME, "quantity"), "{}".format(indx)))
+def test_prices_and_names(app):
+    for ind in range(3):
+        app.add_some_product()
 
-        driver.back()
+    app.remove_all_products()
 
-    driver.find_element_by_css_selector("#cart .link").click()
+
+"""
+    #driver.find_element_by_css_selector("#cart .link").click()
 
     products = driver.find_elements_by_name("remove_cart_item")
     for i in range(len(products)):
@@ -45,3 +40,4 @@ def test_prices_and_names(driver):
     confirm_text = wait.until(EC.presence_of_element_located((By.TAG_NAME, "em")))
     assert confirm_text.text == "There are no items in your cart."
 
+"""
